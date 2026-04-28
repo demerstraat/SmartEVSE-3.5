@@ -1958,7 +1958,7 @@ void handleWIFImode() {
         _LOG_A("HTTP server started\n");
     }
 
-    if (WIFImode == 1 && WiFi.getMode() == WIFI_OFF) {
+    if (WIFImode == 1 && !WiFi.isConnected()) {
         _LOG_A("Starting WiFi..\n");
         WiFi.mode(WIFI_STA);
         WiFi.begin();

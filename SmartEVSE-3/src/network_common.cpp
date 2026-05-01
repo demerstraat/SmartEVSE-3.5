@@ -1446,6 +1446,14 @@ static void fn_http_server(struct mg_connection *c, int ev, void *ev_data) {
     request->setMessage(hm);
 //make mongoose 7.14 compatible with 7.13
 #define mg_http_match_uri(X,Y) mg_match(X->uri, mg_str(Y), NULL)
+    // In portal mode, only allow the portal page, /save and /erasesettings
+    if (WIFImode == 2 &&
+        !mg_match(hm->uri, mg_str("/"),              NULL) &&
+        !mg_match(hm->uri, mg_str("/save"),          NULL) &&
+        !mg_match(hm->uri, mg_str("/erasesettings"), NULL)) {
+        mg_http_reply(c, 403, "Content-Type: text/plain\r\n", "Not available in portal mode");
+        return;
+    }
     // handles URI and response, returns true if handled, false if not
     if (!handle_URI(c, hm, request)) {
         if (mg_match(hm->uri, mg_str("/erasesettings"), NULL)) {

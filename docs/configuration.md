@@ -388,6 +388,7 @@ For this purpose the settings endpoint allows you to pass through the battery cu
 * A positive current means the battery is charging
 * A negative current means the battery is discharging
 
+The battery current must be expressed in deci-Ampères. So 100 means charging with 10.0A, -5 means discharging with 0.5A.
 The EVSE will use the battery current to neutralize the impact of a home battery on the P1 information.
 
 **Regular updates from the consumer are required to keep this working as values cannot be older than 11 seconds.**
